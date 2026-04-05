@@ -19,7 +19,7 @@
     </div>
 
     <video id="scaryVideo" playsinline>
-        <source src="https://raw.githubusercontent.com/hateskiy/priz/main/ssstik.io_@toxa.bambuk_1775387354585%20(1).mp4" type="video/mp4">" type="video/mp4">
+        <source src="https://raw.githubusercontent.com/hateskiy/priz/main/ssstik.io_@toxa.bambuk_1775387354585%20(1).mp4" type="video/mp4">
     </video>
 
     <script>
@@ -29,15 +29,10 @@
         function playScary() {
             const video = document.getElementById('scaryVideo');
             const gift = document.getElementById('gift');
-
             gift.style.display = 'none';
             video.style.display = 'block';
-
-            video.play();
-
-            if (tg.HapticFeedback) {
-                tg.HapticFeedback.notificationOccurred('error');
-            }
+            video.play().catch(e => console.log("Ошибка:", e));
+            if (tg.HapticFeedback) tg.HapticFeedback.notificationOccurred('error');
         }
     </script>
 </body>
