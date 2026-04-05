@@ -1,39 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        body { margin: 0; background: #000; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; font-family: sans-serif; }
-        #gift { font-size: 100px; cursor: pointer; transition: 0.2s; }
-        #gift:active { transform: scale(0.9); }
-        video { display: none; width: 100%; height: 100%; object-fit: cover; }
+        body { margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background: #000; overflow: hidden; color: white; font-family: sans-serif; }
+        #gift { text-align: center; cursor: pointer; }
+        #gift-icon { font-size: 100px; display: block; margin-bottom: 20px; }
+        video { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
     </style>
 </head>
 <body>
-    <div id="gift">🎁</div>
 
-    <video id="scaryVideo">
-        <source src="ssstik.io_@toxa.bambuk_1775387354585.mp4" type="video/mp4">
+    <div id="gift" onclick="playScary()">
+        <span id="gift-icon">🎁</span>
+        <p>Нажми, чтобы открыть подарок!</p>
+    </div>
+
+    <video id="scaryVideo" playsinline>
+        <source src="https://github.com/hateskiy/priz/blob/3e49bb55ac01488b045817ccc8c41c6607a0a26a/ssstik.io_%40toxa.bambuk_1775387354585%20(1).mp4" type="video/mp4">
     </video>
 
     <script>
-        let tg = window.Telegram.WebApp;
-        tg.expand(); // Развернуть на весь экран
+        const tg = window.Telegram.WebApp;
+        tg.expand();
 
-        const gift = document.getElementById('gift');
-        const video = document.getElementById('scaryVideo');
+        function playScary() {
+            const video = document.getElementById('scaryVideo');
+            const gift = document.getElementById('gift');
 
-        gift.onclick = function() {
-            gift.style.display = 'none'; // Убираем подарок
-            video.style.display = 'block'; // Показываем видео
-            video.play(); // Запускаем
+            gift.style.display = 'none';
+            video.style.display = 'block';
 
-            // Включаем вибрацию телефона (если это Android/iOS)
+            video.play();
+
             if (tg.HapticFeedback) {
                 tg.HapticFeedback.notificationOccurred('error');
             }
-        };
+        }
     </script>
 </body>
 </html>
